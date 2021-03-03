@@ -7,6 +7,7 @@
                     flat 
                     color="rgba(255, 255, 255, 0.2)"
                     height="15rem"
+                    :width="homeStartFormWidth"
                     class="pt-4"
             >
               <h1>{{homeTitle}}</h1>
@@ -220,6 +221,16 @@ export default {
       this.$router.push({name: 'boards'})
         .then(() => console.log('resolved'))
         .catch(e => console.log('error: ', e))
+    }
+  },
+  computed: {
+    homeStartFormWidth() {
+      if (this.$vuetify.breakpoint.name === 'sm' ||
+          this.$vuetify.breakpoint.name === 'xs') {
+        return 320
+      } else {
+        return 'auto'
+      }
     }
   }
 }
