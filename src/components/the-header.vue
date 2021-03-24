@@ -16,7 +16,7 @@
           </v-toolbar-title>
         </v-btn>
       <v-spacer />
-      <v-dialog v-model="newBoardBtn.dialog" max-width="30vw">
+      <v-dialog v-model="newBoardBtn.dialog" :max-width="calculatedWidth">
         <template v-slot:activator="{ on }">
           <v-btn
             fab
@@ -28,8 +28,8 @@
           </v-btn>
         </template>
 
-        <v-form>
-          <v-card max-width="30vw">
+        <v-form :max-width="calculatedWidth" min-width='50%'>
+          <v-card >
             <v-container>
               <v-row>
                 <v-col class="text-center">
@@ -181,6 +181,14 @@ export default {
     boardsTitles() {
       return this.boards.map(board => board.title)
     },
+    calculatedWidth() {
+      if (this.$vuetify.breakpoint.name === 'sm' ||
+          this.$vuetify.breakpoint.name === 'xs') {
+        return '50%'
+      } else {
+        return '30vw'
+      }
+    }
   },
   mounted() {
     bus.$on('create-new-board', () => this.newBoardBtn.dialog = !this.newBoardBtn.dialog)

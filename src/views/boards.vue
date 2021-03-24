@@ -14,7 +14,7 @@
       <v-container fluid class="mt-2">
         
         <v-row cols="12">
-          <v-col cols="4"
+          <v-col :cols="CalculatedCols"
             v-for="board in boards"
             :key="board.id"
           >
@@ -71,7 +71,7 @@
           </v-col>
 
           <!-- new board card -->
-          <v-col cols="4">
+          <v-col :cols="CalculatedCols">
             <v-card
               block
               dark 
@@ -117,6 +117,14 @@ export default {
   computed: {
     boards() {
       return this.$store.state.boards
+    },
+    CalculatedCols() {
+      if (this.$vuetify.breakpoint.name === 'sm' ||
+          this.$vuetify.breakpoint.name === 'xs') {
+        return 12
+      } else {
+        return 4
+      }
     }
   }
 }
