@@ -1,5 +1,5 @@
 <template>
-    <v-col cols="3" class="px-2 mb-3">
+    <v-col :cols="calculatedCols" class="px-2 mb-3">
         <v-card color="grey lighten-2">
             <v-container>
                 <v-row>
@@ -102,6 +102,16 @@ export default {
         },
         list() {
             return this.board.lists[this.listIndex]
+        },
+        calculatedCols() {
+            switch(this.$vuetify.breakpoint.name) {
+                case 'sm':
+                    return 6
+                case 'xs':
+                    return 11
+                default:
+                    return 3
+            }
         }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <v-container fluid>
-        <v-row class="my-2">
-            <v-col>
-                <v-card flat class="text-center mx-3">
+        <v-row class="my-2" cols="12" justify="center">
+            <v-col cols="12">
+                <v-card flat class="text-center">
                     <v-card-title>
                         <v-spacer />
                             <h2 class="text-uppercase primary--text">{{board.title}}</h2>
@@ -11,7 +11,7 @@
                 </v-card>
             </v-col>
         </v-row>
-        <v-row class="ml-1">
+        <v-row cols="12" :justify="justifyByWidth">
             <board-list 
                 v-for="(list, listIndex) in board.lists" 
                 :key="listIndex"
@@ -19,7 +19,7 @@
                 v-bind="$props" 
             />
 
-            <v-col cols="3" class="text-center px-2">
+            <v-col :cols="calculatedCols" class="text-center">
                 <v-btn text dark block @click="addNewList">
                     <v-icon dense>mdi-plus</v-icon>
                     {{addListBtnTitle}}
@@ -54,6 +54,19 @@ export default {
     computed: {
     board() {
       return this.$store.getters.getBoard(this.boardId)
+    },
+    calculatedCols() {
+        switch(this.$vuetify.breakpoint.name) {
+            case 'sm':
+                return 6
+            case 'xs':
+                return 11
+            default:
+                return 3
+        }
+    },
+    justifyByWidth() {
+        return this.$vuetify.breakpoint.name === 'xs' ? 'center' : undefined 
     }
   }
 }

@@ -1,17 +1,15 @@
 <template>
-    <v-container class="mt-6">
+    <v-container fluid fill-height align-start class="mt-6">
       <v-row cols="12">
-        <v-spacer></v-spacer>
-        <v-col cols="7">
-          <v-card class="text-center">
-            <pre>
+        <v-spacer />
+        <v-col :cols="calculatedCols">
+          <v-card class="text-center pa-4">
             <span class="subtitle-3">
-{{aboutText}}
+              {{aboutText}}
             </span>
-            </pre>
           </v-card>
         </v-col>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-row>
     </v-container>
 </template>
@@ -30,6 +28,15 @@ You can easily control items content and order,
 adding labels and more...
 
 With the GTD app, no project is too big to handle.`
+    }
+  },
+  computed: {
+    calculatedCols() {
+      if (this.$vuetify.breakpoint.name === 'xs') {
+        return 10
+      } else {
+        return 8
+      }
     }
   }
 }

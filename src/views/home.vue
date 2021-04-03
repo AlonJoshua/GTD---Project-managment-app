@@ -8,6 +8,7 @@
                     color="rgba(255, 255, 255, 0.2)"
                     height="15rem"
                     :width="homeStartFormWidth"
+                    :min-width="homeStartFormWidth"
                     class="pt-4"
             >
               <h1>{{homeTitle}}</h1>

@@ -4,7 +4,7 @@
             v-for="item in menuItems"
             :key="item.name"
             v-model="item.active"
-            max-width="30vw"
+            :max-width="calculatedWidth"
         >
             <template v-slot:activator="{ on, attrs}">
                 <v-list-item v-bind="attrs" v-on="on">
@@ -55,6 +55,14 @@ export default {
         dialogActivationArray() {
             return this.menuItems.map(item => item.active)
         },
+        calculatedWidth() {
+            if (this.$vuetify.breakpoint.name === 'sm' ||
+                this.$vuetify.breakpoint.name === 'xs') {
+                return 320
+            } else {
+                return 500
+            }
+        }
     },
     watch: {
         dialogActivationArray() {

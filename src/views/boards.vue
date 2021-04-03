@@ -1,20 +1,23 @@
 <template>
   <v-main>
-    <v-container class="mt-4">
+    <v-container fluid class="mt-4">
       <!-- title -->
-      <v-card flat>
-        <v-card-title>
-          <v-spacer />
-          <h2 class="text-uppercase primary--text">{{homePageTitle}}</h2>
-          <v-spacer />
-        </v-card-title>
-      </v-card>
-      
+      <v-row cols="12" justify="center">
+        <v-col cols="12">
+          <v-card flat>
+            <v-card-title>
+              <v-spacer />
+              <h2 class="text-uppercase primary--text">{{homePageTitle}}</h2>
+              <v-spacer />
+            </v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
       <!-- boards cards -->
       <v-container fluid class="mt-2">
         
         <v-row cols="12">
-          <v-col :cols="CalculatedCols"
+          <v-col :cols="calculatedCols"
             v-for="board in boards"
             :key="board.id"
           >
@@ -35,7 +38,7 @@
                   <v-row cols="12">
                     <v-col cols="10">
                       <v-card-title>
-                        {{board.title}}
+                        <span>{{board.title}}</span>
                       </v-card-title>
                     </v-col>
                     <v-col cols="1">
@@ -71,7 +74,7 @@
           </v-col>
 
           <!-- new board card -->
-          <v-col :cols="CalculatedCols">
+          <v-col :cols="calculatedCols">
             <v-card
               block
               dark 
@@ -118,14 +121,16 @@ export default {
     boards() {
       return this.$store.state.boards
     },
-    CalculatedCols() {
-      if (this.$vuetify.breakpoint.name === 'sm' ||
-          this.$vuetify.breakpoint.name === 'xs') {
-        return 12
-      } else {
-        return 4
+    calculatedCols() {
+          switch(this.$vuetify.breakpoint.name) {
+            case 'sm':
+              return 6
+            case 'xs':
+              return 12
+            default:
+              return 4
+          }
       }
-    }
   }
 }
 

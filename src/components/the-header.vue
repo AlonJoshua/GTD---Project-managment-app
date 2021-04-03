@@ -28,7 +28,7 @@
           </v-btn>
         </template>
 
-        <v-form :max-width="calculatedWidth" min-width='50%'>
+        <v-form>
           <v-card >
             <v-container>
               <v-row>
